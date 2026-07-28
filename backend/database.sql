@@ -1,0 +1,46 @@
+CREATE DATABASE todo;
+
+USE todo;
+
+CREATE TABLE lists (
+
+    id VARCHAR(36) PRIMARY KEY,
+
+    name VARCHAR(100) NOT NULL,
+
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+
+);
+
+CREATE TABLE tasks (
+
+    id INT AUTO_INCREMENT PRIMARY KEY,
+
+    list_id VARCHAR(36) NOT NULL,
+
+    title VARCHAR(255) NOT NULL,
+
+    done BOOLEAN DEFAULT FALSE,
+
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        ON UPDATE CURRENT_TIMESTAMP,
+
+    FOREIGN KEY(list_id)
+
+        REFERENCES lists(id)
+
+        ON DELETE CASCADE
+
+);
+
+INSERT INTO lists(id,name)
+
+VALUES(
+
+'11111111-1111-1111-1111-111111111111',
+
+'Famiglia'
+
+);
