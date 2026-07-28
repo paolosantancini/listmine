@@ -6,8 +6,6 @@ CREATE TABLE lists (
 
     id VARCHAR(36) PRIMARY KEY,
 
-    name VARCHAR(100) NOT NULL,
-
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 
 );
@@ -32,15 +30,5 @@ CREATE TABLE tasks (
         REFERENCES lists(id)
 
         ON DELETE CASCADE
-
-);
-
-INSERT INTO lists(id,name)
-
-VALUES(
-
-'11111111-1111-1111-1111-111111111111',
-
-'Famiglia'
 
 );
