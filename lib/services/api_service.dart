@@ -9,7 +9,7 @@ class ApiService {
 
   Future<List<Task>> getTasks(String listId) async {
     final response = await http.get(
-      Uri.parse("${Uri.base.origin}/api/lists/$listId/tasks"),
+      Uri.parse("${Uri.base.origin}/listmine/api/lists/$listId/tasks"),
     );
 
     if (response.statusCode != 200) {
@@ -23,7 +23,7 @@ class ApiService {
 
   Future<void> addTask(String listId, String title) async {
     await http.post(
-      Uri.parse("${Uri.base.origin}/api/lists/$listId/tasks"),
+      Uri.parse("${Uri.base.origin}/listmine/api/lists/$listId/tasks"),
 
       headers: {"Content-Type": "application/json"},
 
@@ -33,7 +33,7 @@ class ApiService {
 
   Future<void> updateTask(Task task) async {
     await http.put(
-      Uri.parse("${Uri.base.origin}/api/tasks/${task.id}"),
+      Uri.parse("${Uri.base.origin}/listmine/api/tasks/${task.id}"),
 
       headers: {"Content-Type": "application/json"},
 
@@ -42,12 +42,12 @@ class ApiService {
   }
 
   Future<void> deleteTask(int id) async {
-    await http.delete(Uri.parse("${Uri.base.origin}/api/tasks/$id"));
+    await http.delete(Uri.parse("${Uri.base.origin}/listmine/api/tasks/$id"));
   }
 
   Future<String> openList(String listId) async {
     final response = await http.post(
-      Uri.parse("${Uri.base.origin}/api/lists"),
+      Uri.parse("${Uri.base.origin}/listmine/api/lists"),
 
       headers: {"Content-Type": "application/json"},
 
