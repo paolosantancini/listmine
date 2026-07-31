@@ -3,7 +3,7 @@ import 'package:socket_io_client/socket_io_client.dart' as io;
 import '../models/task.dart';
 
 class SocketService {
-  static const String server = "http://192.168.1.217:3000";
+  static const String server = "http://94.177.201.57:3000";
 
   late final io.Socket _socket;
 

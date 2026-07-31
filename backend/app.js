@@ -21,8 +21,10 @@ const server = http.createServer(app);
 
 socketManager.initialize(server);
 
+//server.listen(config.port, config.host, () => {
 server.listen(config.port, () => {
 
-    console.log("Server avviato sulla porta", config.port);
+//    console.log("Server avviato: ", config.host,":",config.port);
+    console.log("Server avviato - porta: ", config.port);
 
 });

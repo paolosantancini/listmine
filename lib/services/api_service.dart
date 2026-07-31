@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 import '../models/task.dart';
 
 class ApiService {
-  static const String server = "http://192.168.1.217:3000";
+  static const String server = "http://94.177.201.57:3000";
 
   Future<List<Task>> getTasks(String listId) async {
     final response = await http.get(
