@@ -14,6 +14,7 @@ Nginx 1.26.3
  - backend/.env
  - mysql -u your_db_user -p < database.sql
  - for web server see default.nginx
+ - check lib/services/ files about "Uri.parse("${Uri.base.origin}/listmine/api/lists/$listId/tasks")". This is subfolder (listmine) site web configuration example.
 
 ## Run application
  - flutter build web
