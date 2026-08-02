@@ -1,24 +1,30 @@
 server {
+    server_name www.studiosantancini.it studiosantancini.it;
 
-    listen 80;
-    server_name app.miosito.it;
-
-    root /var/www/web;
+    #
+    # Sito personale
+    #
+    root /var/www/html;
     index index.html;
 
-    #
-    # Flutter
-    #
+    # Sito principale
     location / {
         try_files $uri $uri/ /index.html;
     }
 
-    #
-    # API REST
-    #
-    location /api/ {
+    # Flutter
+    location /listmine {
+        alias /var/www/listmine;
+        index index.html;
+        try_files $uri $uri/ /index.html;
+    }
 
-        proxy_pass http://127.0.0.1:3000;
+    #
+    # REST
+    #
+    location /listmine/api/ {
+
+        proxy_pass http://127.0.0.1:3000/api/;
 
         proxy_http_version 1.1;
 
@@ -26,21 +32,55 @@ server {
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         proxy_set_header X-Forwarded-Proto $scheme;
+    }
+
+    #
+    # Socket.IO
+    #
+    location /listmine/socket.io/ {
+
+        proxy_pass http://127.0.0.1:3000;
+
+        proxy_http_version 1.1;
+
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "Upgrade";
+
+        proxy_set_header Host $host;
+
+        #proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        #proxy_set_header X-Forwarded-Proto $scheme;
+
+        #proxy_read_timeout 86400;
 
     }
 
-    location /socket.io/ {
 
-    proxy_pass http://127.0.0.1:3000;
+    listen 443 ssl; # managed by Certbot
+    ssl_certificate /etc/letsencrypt/live/studiosantancini.it/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/studiosantancini.it/privkey.pem; # managed by Certbot
+    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
 
-    proxy_http_version 1.1;
 
-    proxy_set_header Upgrade $http_upgrade;
-    proxy_set_header Connection "Upgrade";
+}
+server {
+    if ($host = www.studiosantancini.it) {
+        return 301 https://$host$request_uri;
+    } # managed by Certbot
 
-    proxy_set_header Host $host;
-    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-    
-   }
+
+    if ($host = studiosantancini.it) {
+        return 301 https://$host$request_uri;
+    } # managed by Certbot
+
+
+
+    listen 80;
+    server_name www.studiosantancini.it studiosantancini.it;
+    return 404; # managed by Certbot
+
+
+
 
 }

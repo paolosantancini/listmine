@@ -6,12 +6,12 @@ function initialize(server) {
 
     io = new Server(server, {
 
+	path: "/listmine/socket.io/",
         cors: {
 
-            origin: "*"
+           origin: "*"
 
         }
-
     });
 
     io.on("connection", (socket) => {

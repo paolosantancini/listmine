@@ -11,6 +11,7 @@ class SocketService {
     _socket = io.io(
       server,
       io.OptionBuilder()
+          .setPath("/listmine/socket.io/")
           .setTransports(["websocket"])
           .disableAutoConnect()
           .build(),
@@ -18,7 +19,7 @@ class SocketService {
 
     _socket.onConnect((_) {
       print("Socket connesso");
-//      joinList(currentListId);
+      //      joinList(currentListId);
     });
 
     _socket.onDisconnect((_) {
