@@ -67,33 +67,22 @@ class _HomePageState extends State<HomePage> {
                       child: const Text("Apri"),
 
                       onPressed: () async {
-                        final code = controller.text.trim().toUpperCase();
+                        final navigator = Navigator.of(context);
 
-                        if (code.isEmpty) {
-                          return;
-                        }
+                        final code = controller.text.trim().toUpperCase();
+                        if (code.isEmpty) return;
 
                         final repository = TaskRepository();
-
                         final listId = await repository.openList(code);
 
-                        if (!mounted) {
-                          return;
-                        }
+                        if (!mounted) return;
 
-                        Navigator.push(
-                          context,
-
+                        await navigator.push(
                           MaterialPageRoute(
-                            builder: (_) {
-                              return ChangeNotifierProvider(
-                                create: (_) {
-                                  return TaskProvider(listId);
-                                },
-
-                                child: TodoPage(listId: listId),
-                              );
-                            },
+                            builder: (_) => ChangeNotifierProvider(
+                              create: (_) => TaskProvider(listId),
+                              child: TodoPage(listId: listId),
+                            ),
                           ),
                         );
                       },

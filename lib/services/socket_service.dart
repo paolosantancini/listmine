@@ -1,9 +1,10 @@
 import 'package:socket_io_client/socket_io_client.dart' as io;
-
 import '../models/task.dart';
+import 'package:flutter/foundation.dart';
 
 class SocketService {
   String server = Uri.base.origin;
+  String? _currentListId;
 
   late final io.Socket _socket;
 
@@ -18,16 +19,18 @@ class SocketService {
     );
 
     _socket.onConnect((_) {
-      print("Socket connesso");
-      //      joinList(currentListId);
+      debugPrint("Socket connesso");
+      if (_currentListId != null) {
+        _socket.emit("join-list", _currentListId);
+      }
     });
 
     _socket.onDisconnect((_) {
-      print("Socket disconnesso");
+      debugPrint("Socket disconnesso");
     });
 
     _socket.onConnectError((err) {
-      print(err);
+      debugPrint(err);
     });
 
     _socket.connect();
@@ -38,6 +41,7 @@ class SocketService {
   }
 
   void joinList(String listId) {
+    _currentListId = listId;
     _socket.emit("join-list", listId);
   }
 

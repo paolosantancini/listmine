@@ -76,7 +76,7 @@ packages:
     source: sdk
     version: "0.0.0"
   http:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: http
       sha256: "87721a4a50b19c7f1d49001e51409bddc46303966ce89a65af4f4e6004896412"
@@ -172,7 +172,7 @@ packages:
     source: hosted
     version: "1.9.1"
   provider:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: provider
       sha256: "4e82183fa20e5ca25703ead7e05de9e4cceed1fbd1eadc1ac3cb6f565a09f272"
@@ -185,7 +185,7 @@ packages:
     source: sdk
     version: "0.0.0"
   socket_io_client:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: socket_io_client
       sha256: f5990ff303d385e7b2150f0e57cca097a8d20c6a2ae0a22cb2d496661ea8ed9b
